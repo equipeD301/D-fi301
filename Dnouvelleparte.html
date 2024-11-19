@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="d.css">
+	<title>Partie en Cours</title>
+</head>
+
+<body onload="changeColor()">
+	<div>
+		<button class="buttonHG" onclick="window.location.href='Daccueille.html';">Retour</button>
+		<button class="buttonHD" onclick="toggleRules()">Règle</button>
+	</div>
+
+	<div id="rules" class="rules-container">
+        	<p class="texte">pomme</p>
+	</div>
+
+	<h1>Vous allez commencer la partie, dans ce jeu vous testerez vos connaissances sur la bio301 ce qui vous permettra de créer votre propre cellule !</h1>
+
+	<div class="container" id="1" style="display: none;">
+        	<p class="texte">bien oué-j, t'as finit. ton score est de <span id="score"></span> bonnes réponses sur <span id="totale"></span> </p>
+	</div>
+
+	<div class="container" id="2" style="display: none;">
+        	<p class="texte"> la réponse que tu as mis est fausse, la vrai est <span id="bonneReponse"></span></p>
+	</div>
+
+	<div id="question-container" class="question-container">
+        	<p id="questionText" style="color: white;"></p>
+	</div>
+
+
+	<div id="question-container">
+		<button id="reponse1" class="buttonQ"></button>
+		<button id="reponse2" class="buttonQ"></button>
+		<button id="reponse3" class="buttonQ"></button>
+		<button id="reponse4" class="buttonQ"></button>
+	</div>
+
+	<div>
+		<button class="buttonNQ" onclick="nombreQ(5)">5 questions</button>
+		<button class="buttonNQ" onclick="nombreQ(10)">10 questions</button>
+		<button class="buttonNQ" onclick="nombreQ(15)">15 questions</button>
+	</div>
+
+	<img src="cellule-1.png" class="image-transparente" id="i1">
+	<img src="cellule-2.png" class="image-transparente" id="i2">
+	<img src="cellule-3.png" class="image-transparente" id="i3">
+	<img src="cellule-4.png" class="image-transparente" id="i4">
+	<img src="cellule-5.png" class="image-transparente" id="i5">
+	<img src="cellule-6.png" class="image-transparente" id="i6">
+	<img src="cellule-7.png" class="image-transparente" id="i7">
+	<img src="cellule-8.png" class="image-transparente" id="i8">
+	<img src="cellule-9.png" class="image-transparente" id="i9">
+	<img src="cellule-10.png" class="image-transparente" id="i10">
+
+
+
+	<button class="buttonC" onclick="commencer()">Commencer</button>
+	<button class="buttonCc" onclick="continuer()" style="display: none;">Continuer</button>
+
+
+
+
+<script>
+	const colors = ['#FF8A65', '#66FF7A', '#668FFF', '#F4D03F', '#BB86FC'];
+	const colors1 = ['#993522', '#229938', '#223399', '#997A0A', '#55296F'];
+	let randomIndex1 = Math.floor(Math.random() * colors.length);
+
+	function changeColor() {
+		let randomIndex = Math.floor(Math.random() * colors.length);
+		while (randomIndex === randomIndex1) {
+			randomIndex = Math.floor(Math.random() * colors.length);
+		}
+		randomIndex1 = randomIndex;
+		document.body.style.background = `radial-gradient(circle, ${colors[randomIndex]}, ${colors1[randomIndex1]})`;
+		console.log("Couleur changée en :", colors[randomIndex], colors1[randomIndex1]);
+	}
+
+	function toggleRules() {
+		const rules = document.getElementById("rules");
+		rules.style.display = (rules.style.display === "none" || rules.style.display === "") ? "block" : "none";
+	}
+
+	const questions = [
+		{ question:"Quelle technique permet d’observer la dynamique d’une protéine dans une cellule ?", reponseB:"FRAP", reponseM:["FRET","Southern blot","co-immunoprécipitation"]},
+		{ question:"Quelle est la composition des ribosomes procaryote et eucaryote ?", reponseB:"70S et 80S", reponseM:["50S et 30S","60S et 40S","80S et 100S"]},
+		{ question:"Quelle protéine permet l’ouverture de la double hélice de l’ADN ?", reponseB:"l’hélicase ", reponseM:["topoisomerase I","primase","topoisomerase II"]},
+		{ question:"Quelles sont les différentes phases de dynamique de polymérisation des filaments d’actines ?", reponseB:"latence, élongation, équilibre", reponseM:["latence, exponentielle, stationnaire","initiation, élongation, terminaison","aucunes des autres réponses"]},
+		{ question:"Quelle technique permet de savoir si une protéine interagit avec une autre  ?", reponseB:"La FRET", reponseM:["La FRAP","immunoprécipitation","Western Blot"]},
+		{ question:"Quelle technique permet de détecter les acides nucléiques ?", reponseB:"western Blot", reponseM:["la FRAP","la FRET","Northern Blot"]},
+		{ question:"Quels sont les acteurs de la traduction ?", reponseB:"ARNm, ARNt et ribosomes", reponseM:["ARNm, ADN polymèrase et ARNt","ARNm, ribosomes et promoteurs","ARNt, ADN polymèrase et promoteur"]},
+		{ question:"Que nous permet d’obtenir la loi de Stockes ?", reponseB:"la vitesse de sédimentation", reponseM:["la vitesse de migration","le temps de sédimentation","le temps de migration"]},
+		{ question:"Lors de la réplication, qu’elle enzyme relance la progression de l’œil de réplication ?", reponseB:"la topoisomèrase II", reponseM:["l’hélicase","Le ribosome","la primase"]},
+		{ question:"la traduction chez les eucaryotes :", reponseB:"aucunes des autres propositions", reponseM:["a lieu dans la mitochondrie","les protéines synthétisées dans les organites utilisent une machinerie semblable à celle des procaryotes","a lieu dans le noyau "]},
+		{ question:"chez les eucaryotes, à l'issue de la phase S:", reponseB:"la quantité d'ADN sera dupliquée", reponseM:["la cellule aura dupliquer le nombre de chromosomes","aucunes des autres propositions","la cellule se sera divisée"]},
+		{ question:"la primase initie la synthèse : ", reponseB:"d'un fragment d'ARN", reponseM:["d'ATP ","d'un fragment d'ADN","de nucléotide"]},
+		{ question:"Qu'est-ce qu'un CKI ? ", reponseB:"une protéine inhibitrice de cycline kinase", reponseM:["un facteur de croissance","un inhibiteur de kinase","un complexte lipido-protéique du cytoplasme et du REL"]},
+		{ question:"la plupart de nos cellules sont :", reponseB:"en phase G0", reponseM:["en phase S","en mitose","tumorale"]},
+		{ question:"les organites pouvant être purifiés sont : ", reponseB:"le noyau et les chloroplastes", reponseM:["les protéines et le noyau","la membrane plasmique et les protéines","les chloroplastes et la membrane plasmique"]},
+	            { question: "Que permet la technique d'immunoprécipitation ?", reponseB: "isoler une protéine  l'aide d'un anticorps", reponseM: ["de suivre la dynamique d'une protéine ", "detecter une sequence d'ADN", "déterminer l'interaction entre protéines"] }
+		{ question: "Quelle partie de l’anticorps va se lié au antigène ? 
+", reponseB: "le paratope", reponseM: ["la chaîne lourde ", "les régions variables", "l’epitope"] }
+		{ question: "Quel est le Lp d’un microfilament d’actine?", reponseB: "10 μm", reponseM: ["1 μm", "1 mm", "35nm"] }
+		{ question: "Qu’est-ce qu’une protéine chaperonne ? ", reponseB: "protéines cytoplasmiques maintenant la linéarité des ribosomes", reponseM: ["protéines cytoplasmiques maintenant la linéarité des lysosomes", "protéines permettant la translocation des ribosomes", "protéines permettant la translocation des lysosomes"] }
+		{ question: "Sur quoi agissent les facteurs de transcription ?", reponseB: "toutes les réponses sont justes", reponseM: ["l’élongation de la transcription", "l’initiation de la transcription", "la formation du complexe de pré-initiation"] }
+        ];
+
+	let correctAnswer;
+	let dejadonne = [];
+	let compteurBR = 0; //compteur de bonne réponse
+	let NQ = 0; //nombre de question répondus
+	let NQF; //nombre de question totales
+
+
+	function commencer() {
+		document.querySelector('.buttonC').style.display = 'none';
+		document.querySelectorAll('.buttonNQ').forEach(button => button.style.display = 'inline-block');
+	}
+
+	function nombreQ(Q) {
+		NQF = Q;
+		document.querySelectorAll('.buttonNQ').forEach(button => button.style.display = 'none');
+		question();
+	}
+
+	function continuer() {
+		document.querySelector('.buttonCc').style.display = 'none';
+		document.getElementById("2").style.display = 'none';
+		question();
+	}
+
+	function question() {
+		NQ += 1;
+		document.querySelector('.buttonCc').style.display = 'none';
+		let numQuestion = Math.floor(Math.random() * questions.length);
+
+		if (dejadonne.includes(numQuestion)) {
+			while (dejadonne.includes(numQuestion)) {
+				numQuestion = (numQuestion + 1) % questions.length;
+			}
+		}
+		dejadonne.push(numQuestion);
+		poserQuestion(numQuestion);
+	}
+
+	function poserQuestion(numQuestion) {
+		const questionChoisie = questions[numQuestion];
+		document.getElementById("questionText").innerText = questionChoisie.question;
+		correctAnswer = questionChoisie.reponseB; // Définit la bonne réponse pour cette question
+
+		const allReponses = [questionChoisie.reponseB, ...questionChoisie.reponseM];
+ 		const shuffledReponses = allReponses.sort(() => Math.random() - 0.5);
+
+		document.getElementById("reponse1").innerText = shuffledReponses[0];
+		document.getElementById("reponse1").onclick = function() { reponse(shuffledReponses[0]); };
+
+		document.getElementById("reponse2").innerText = shuffledReponses[1];
+		document.getElementById("reponse2").onclick = function() { reponse(shuffledReponses[1]); };
+
+		document.getElementById("reponse3").innerText = shuffledReponses[2];
+		document.getElementById("reponse3").onclick = function() { reponse(shuffledReponses[2]); };
+
+		document.getElementById("reponse4").innerText = shuffledReponses[3];
+		document.getElementById("reponse4").onclick = function() { reponse(shuffledReponses[3]); };
+
+		document.querySelectorAll('.buttonQ').forEach(button => button.style.display = 'inline-block');
+ 		document.getElementById("question-container").style.display = 'block';
+	}
+
+	function reponse(reponseDonnee) {
+		if (reponseDonnee.trim() === correctAnswer.trim()) {
+			Breponse();
+		} else {
+			Mreponse();
+		}
+
+		document.querySelectorAll('.buttonQ').forEach(button => button.style.display = 'none');
+		document.getElementById("question-container").style.display = 'none';
+
+		if (NQ === NQF) {
+			fin();
+		} else {
+			document.querySelector('.buttonCc').style.display = 'block';
+		}
+	}
+
+	function Breponse() {
+		compteurBR += 1;
+		image(compteurBR);
+		teste(compteurBR);
+	}
+
+
+	function image(compteurBN) {
+		document.querySelectorAll('.image-transparente ').forEach(button => button.style.display = 'none');
+    		if (NQF == 5) {
+        		if (compteurBN == 1) { 
+            			document.getElementById("i9").style.display = 'block'; 
+        		} 
+			else if (compteurBN == 2) { 
+            			document.getElementById("i7").style.display = 'block'; 
+        		} 
+        		else if (compteurBN == 3) { 
+            			document.getElementById("i5").style.display = 'block'; 
+        		} 
+        		else if (compteurBN == 4) { 
+            			document.getElementById("i3").style.display = 'block'; 
+        		} 
+        		else if (compteurBN == 5) { 
+            			document.getElementById("i1").style.display = 'block'; 
+        		}
+
+    		} 
+		else if (NQF == 10) {
+        		teste(2);
+    		} 
+		else if (NQF == 15) {
+        		teste(3);
+		}
+	
+	}
+
+
+
+
+
+
+
+
+	function Mreponse() {
+		document.getElementById("2").style.display = 'block';
+		const bonneReponseElement = document.getElementById("bonneReponse");
+    		bonneReponseElement.innerText = correctAnswer;
+	}
+
+	function fin() {
+		document.getElementById('1').style.display = 'block';
+		const scoreElement = document.getElementById('score');
+		scoreElement.innerText = compteurBR;
+		const totaleElement = document.getElementById('totale');
+		totaleElement.innerText = NQF;
+	}
+
+	function teste(n) {
+		alert("c'est cool, ça s'active !" + n);
+	}
+</script>
+</body>
+</html>
