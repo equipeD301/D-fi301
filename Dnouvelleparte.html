@@ -42,7 +42,7 @@
 	<div>
 		<button class="buttonNQ" onclick="nombreQ(5)">5 questions</button>
 		<button class="buttonNQ" onclick="nombreQ(10)">10 questions</button>
-		<button class="buttonNQ" onclick="nombreQ(15)">15 questions</button>
+		<button class="buttonNQ" onclick="nombreQ(20)">20 questions</button>
 	</div>
 
 	<img src="cellule-1.png" class="image-transparente" id="i1">
@@ -100,11 +100,13 @@
 		{ question:"Qu'est-ce qu'un CKI ? ", reponseB:"une protéine inhibitrice de cycline kinase", reponseM:["un facteur de croissance","un inhibiteur de kinase","un complexte lipido-protéique du cytoplasme et du REL"]},
 		{ question:"la plupart de nos cellules sont :", reponseB:"en phase G0", reponseM:["en phase S","en mitose","tumorale"]},
 		{ question:"les organites pouvant être purifiés sont : ", reponseB:"le noyau et les chloroplastes", reponseM:["les protéines et le noyau","la membrane plasmique et les protéines","les chloroplastes et la membrane plasmique"]},
-	            { question: "Que permet la technique d'immunoprécipitation ?", reponseB: "isoler une protéine  l'aide d'un anticorps", reponseM: ["de suivre la dynamique d'une protéine ", "detecter une sequence d'ADN", "déterminer l'interaction entre protéines"] }
-		{ question: "Quelle partie de l’anticorps va se lié au antigène ? 
-", reponseB: "le paratope", reponseM: ["la chaîne lourde ", "les régions variables", "l’epitope"] }
-		{ question: "Quel est le Lp d’un microfilament d’actine?", reponseB: "10 μm", reponseM: ["1 μm", "1 mm", "35nm"] }
-		{ question: "Qu’est-ce qu’une protéine chaperonne ? ", reponseB: "protéines cytoplasmiques maintenant la linéarité des ribosomes", reponseM: ["protéines cytoplasmiques maintenant la linéarité des lysosomes", "protéines permettant la translocation des ribosomes", "protéines permettant la translocation des lysosomes"] }
+	            { question: "Que permet la technique d'immunoprécipitation ?", reponseB: "isoler une protéine  l'aide d'un anticorps", reponseM: ["de suivre la dynamique d'une protéine ", "detecter une sequence d'ADN", "déterminer l'interaction entre protéines"] },
+		{ question: "Quelle partie de l’anticorps va se lié au antigène ? ", reponseB: "le paratope", reponseM: ["la chaîne lourde ", "les régions variables", "l’epitope"] },
+		{ question: "Quel est le Lp d’un microfilament d’actine?", reponseB: "10 μm", reponseM: ["1 μm", "1 mm", "35nm"] },
+		{ question: "Qu’est-ce qu’une protéine chaperonne ? ", reponseB: "protéines cytoplasmiques maintenant la linéarité des ribosomes", reponseM: ["protéines cytoplasmiques maintenant la linéarité des lysosomes", "protéines permettant la translocation des ribosomes", "protéines permettant la translocation des lysosomes"] },
+		{ question: "Quel est l’avantage de la GFP par rapport aux  Ac marqués par fluorescence pour étudier le mouvement d’une protéine au sein d’une cellule ?", reponseB: "La GFP peut être observée par microscopie confocale", reponseM: ["les protéines fusionnées à la GFP peuvent êtres identifiées par western-blot", "La GFP peut émettre de la fluorescence après fixation des cellules", "La GFP ralenti le déplacement des protéines, ce qui facilite l’observation microscopique"] },
+		{ question: "Quel réponse est une étape du northern-blot ?", reponseB: "Hybridation avec une sonde marquée pour détecter un ARNm", reponseM: ["Incubation avec un anticorps primaire", "Révélation de la protéine par fluorescence", "Electrophorèse pour séparer les fragments d’ADN"] },
+		{ question: "L’ordre croissant de compaction de l’ADN est :", reponseB: "collier de perle, solénoïde, boucles de chromatine, boucles condensées, chromosome mitotique", reponseM: ["collier de perle, boucles de chromatine, boucles condensées, solénoïde, chromosome mitotique", "solénoïde, boucles de chromatine, boucles condensées, collier de perle, chromosome mitotique", "solénoïde, collier de perle, boucles de chromatine, boucles condensées, chromosome mitotique"] },
 		{ question: "Sur quoi agissent les facteurs de transcription ?", reponseB: "toutes les réponses sont justes", reponseM: ["l’élongation de la transcription", "l’initiation de la transcription", "la formation du complexe de pré-initiation"] }
         ];
 
@@ -190,7 +192,6 @@
 	function Breponse() {
 		compteurBR += 1;
 		image(compteurBR);
-		teste(compteurBR);
 	}
 
 
@@ -215,10 +216,69 @@
 
     		} 
 		else if (NQF == 10) {
-        		teste(2);
+			if (compteurBN == 1) {
+				document.getElementById("i10").style.display = 'block'; 
+			} 
+			else if (compteurBN == 2) {
+				document.getElementById("i9").style.display = 'block'; 
+			} 
+			else if (compteurBN == 3) {
+				document.getElementById("i8").style.display = 'block';
+			} 
+			else if (compteurBN == 4) {
+					document.getElementById("i7").style.display = 'block';
+			} 
+			else if (compteurBN == 5) {
+					document.getElementById("i6").style.display = 'block';
+			} 
+			else if (compteurBN == 6) {
+					document.getElementById("i5").style.display = 'block';
+			} 
+			else if (compteurBN == 7) {
+					document.getElementById("i4").style.display = 'block';
+			} 
+			else if (compteurBN == 8) {
+					document.getElementById("i3").style.display = 'block';
+			} 
+			else if (compteurBN == 9) {
+					document.getElementById("i2").style.display = 'block';
+			} 
+			else if (compteurBN == 10) {
+					document.getElementById("i1").style.display = 'block';
+			}
     		} 
-		else if (NQF == 15) {
-        		teste(3);
+		else if (NQF == 20) {
+			if ([1, 2].includes(compteurBN)) {
+				document.getElementById("i10").style.display = 'block'; 
+			} 
+			else if ([3, 4].includes(compteurBN)) {
+				document.getElementById("i9").style.display = 'block'; 
+			} 
+			else if ([5, 6].includes(compteurBN)) {
+				document.getElementById("i8").style.display = 'block';
+			} 
+			else if ([7, 8].includes(compteurBN)) {
+					document.getElementById("i7").style.display = 'block';
+			} 
+			else if ([9, 10].includes(compteurBN)) {
+					document.getElementById("i6").style.display = 'block';
+			} 
+			else if ([11, 12].includes(compteurBN)) {
+					document.getElementById("i5").style.display = 'block';
+			} 
+			else if ([13, 14].includes(compteurBN)) {
+					document.getElementById("i4").style.display = 'block';
+			} 
+			else if ([15, 16].includes(compteurBN)) {
+					document.getElementById("i3").style.display = 'block';
+			} 
+			else if ([17, 18, 19].includes(compteurBN)) {
+					document.getElementById("i2").style.display = 'block';
+			} 
+			else if (compteurBN == 20) {
+					document.getElementById("i1").style.display = 'block';
+			}
+
 		}
 	
 	}
